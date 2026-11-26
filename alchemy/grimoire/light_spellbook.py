@@ -1,4 +1,4 @@
-from grimoire.light_validator import validate_ingredients as validator
+import alchemy.grimoire.light_validator as light_validator
 
 
 def light_spell_allowed_ingredients() -> list[str]:
@@ -7,12 +7,7 @@ def light_spell_allowed_ingredients() -> list[str]:
 
 
 def light_spell_record(spell_name: str, ingredients: str) -> str:
-    if validator(ingredients) == "VALID":
-        print(f"Spell recorded: {spell_name} ({ingredients} - VALID)")
+    if light_validator.validate_ingredients(ingredients) == "VALID":
+        return f"Spell recorded: {spell_name} ({ingredients} - VALID)"
     else:
-        print(f"Spell recorded: {spell_name} ({ingredients} - INVALID)")
-
-
-if __name__ == "__main__":
-    res = light_spell_record("Fantasy", "air, wind, fire")
-    print(res)
+        return f"Spell recorded: {spell_name} ({ingredients} - INVALID)"
